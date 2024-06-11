@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 500px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            border-color: #007bff;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #fff;
+        }
+
+        .message.success {
+            background-color: #28a745;
+        }
+
+        .message.error {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% csrf_token %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        
+        <h1>Update Task</h1>
+        <form action="#" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="name">Task:</label>
+            <input type="text" id="name" value="{{task.task_name}}" name="name" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
